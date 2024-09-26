@@ -16,5 +16,12 @@ This respositry consists of the submission for the First Mini Project for the co
 
 ## Instructions
 
+- Install the dependencies
+```bash
+pip install -r requirements
+```
+
+- Install the dataset, make sure the `datasets/` directory is present in the root
+
 ## References 
 
