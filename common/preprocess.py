@@ -16,5 +16,5 @@ def getdfs():
 
     train_df = get_char_columns(train_df)
     val_df = get_char_columns(val_df)
-    
+
     return train_df, val_df
