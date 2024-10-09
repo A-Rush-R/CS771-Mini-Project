@@ -2,6 +2,7 @@ from xgboost import XGBClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.neural_network import MLPClassifier
+from sklearn.svm import SVC
 
 def predict_xgboost(x_train, y_train, x_val, use_label_encoder=False, eval_metric='logloss') :
     '''
@@ -53,5 +54,18 @@ def predict_mlp(x_train, y_train, x_val, max_iter=1000, random_state=42, hidden_
     mlp_model.fit(x_train, y_train)
     
     y_pred = mlp_model.predict(x_val)
+
+    return y_pred
+
+def predict_svc(x_train, y_train, x_val, random_state=42, kernel='rbf', c=1.0, gamma='scale', max_iter=1000) :
+    '''
+    inputs : training data and validation data in dataframe
+    outputs : validation predictions and truth values
+    '''
+    
+    svm_model = SVC(random_state=random_state, kernel=kernel, C=c, gamma=gamma, max_iter=max_iter)
+    svm_model.fit(x_train, y_train)
+    
+    y_pred = svm_model.predict(x_val)
 
     return y_pred
