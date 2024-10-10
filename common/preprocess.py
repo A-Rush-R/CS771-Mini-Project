@@ -1,4 +1,5 @@
 import pandas as pd
+from sklearn.preprocessing import OneHotEncoder
 
 def getdfs():
     '''
@@ -18,3 +19,17 @@ def getdfs():
     val_df = get_char_columns(val_df)
 
     return train_df, val_df
+
+def one_hot_encode(train_df, val_df):
+    '''
+    one hot encode the character columns
+    '''
+    y_train = train_df['label']
+    y_val = val_df['label']
+    train_df.drop('label', axis=1,inplace=True)
+    val_df.drop('label', axis = 1, inplace = True)
+    oh_encoder = OneHotEncoder(handle_unknown = 'ignore')
+    oh_encoder.fit(train_df)
+    train_df = pd.DataFrame(oh_encoder.transform(train_df).toarray())
+    val_df = pd.DataFrame(oh_encoder.transform(val_df).toarray())
+    return train_df, val_df, y_train, y_val
