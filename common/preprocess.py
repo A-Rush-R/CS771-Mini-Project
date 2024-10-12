@@ -1,13 +1,18 @@
 import pandas as pd
 from sklearn.preprocessing import OneHotEncoder
+from typing import Literal
 
-def getdfs():
+def getdfs(data : str, train_size : float = 1):
     '''
     preprocess and return train_df and val_df
     '''
-    train_df = pd.read_csv("../datasets/train/train_emoticon.csv")
-    val_df = pd.read_csv("../datasets/valid/valid_emoticon.csv")
-
+    if data not in ['text_seq', 'feature' , 'emoticon']:
+        raise ValueError("Invalid data type")
+    
+    train_df = pd.read_csv(f"../datasets/train/train_{data}.{'npz' if data == 'feature' else 'csv'}")
+    val_df = pd.read_csv(f"../datasets/valid/valid_{data}.{'npz' if data == 'feature' else 'csv'}")
+    
+    train_df = train_df[:int(len(train_df)*train_size)]
 
     def get_char_columns(df):
         for i in range(len(df['input_emoticon'][0])):
@@ -15,8 +20,9 @@ def getdfs():
         
         return df[df.columns.to_list()[2:] + ['label']]
 
-    train_df = get_char_columns(train_df)
-    val_df = get_char_columns(val_df)
+    if data == 'emoticon':
+        train_df = get_char_columns(train_df)
+        val_df = get_char_columns(val_df)
 
     return train_df, val_df
 
