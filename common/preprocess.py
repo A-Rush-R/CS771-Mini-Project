@@ -36,6 +36,8 @@ def one_hot_encode(train_df, val_df):
     val_df.drop('label', axis = 1, inplace = True)
     oh_encoder = OneHotEncoder(handle_unknown = 'ignore')
     oh_encoder.fit(train_df)
+    
     train_df = pd.DataFrame(oh_encoder.transform(train_df).toarray())
     val_df = pd.DataFrame(oh_encoder.transform(val_df).toarray())
+    
     return train_df, val_df, y_train, y_val
