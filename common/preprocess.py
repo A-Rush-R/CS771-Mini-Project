@@ -9,8 +9,12 @@ def getdfs(data : str, train_size : float = 1):
     if data not in ['text_seq', 'feature' , 'emoticon']:
         raise ValueError("Invalid data type")
     
-    train_df = pd.read_csv(f"../datasets/train/train_{data}.{'npz' if data == 'feature' else 'csv'}")
-    val_df = pd.read_csv(f"../datasets/valid/valid_{data}.{'npz' if data == 'feature' else 'csv'}")
+    if data == 'feature' : 
+        train_df = np.load(f"../datasets/train/train_{data}.npz")
+        valid_df = np.load(f"../datasets/valid/valid_{data}.npz")
+    else :
+        train_df = pd.read_csv(f"../datasets/train/train_{data}.csv")
+        val_df = pd.read_csv(f"../datasets/valid/valid_{data}.csv")
     
     train_df = train_df[:int(len(train_df)*train_size)]
 
