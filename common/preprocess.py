@@ -28,7 +28,7 @@ def getdfs(data : str, train_size : float = 1):
 
 def one_hot_encode(train_df, val_df):
     '''
-    one hot encode the character columns
+    one hot encode the character columns for emoticons
     '''
     y_train = train_df['label']
     y_val = val_df['label']
