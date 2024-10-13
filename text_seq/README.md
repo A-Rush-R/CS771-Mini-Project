@@ -1,1 +1,1 @@
-# Text Sequene Dataaset
+# Text Sequence Dataset

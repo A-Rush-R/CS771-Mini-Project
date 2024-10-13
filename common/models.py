@@ -3,6 +3,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.neural_network import MLPClassifier
 from sklearn.svm import SVC
+from sklearn.model_selection import GridSearchCV
 
 def predict_xgboost(x_train, y_train, x_val, use_label_encoder=False, eval_metric='logloss') :
     '''
@@ -69,3 +70,17 @@ def predict_svc(x_train, y_train, x_val, random_state=42, kernel='rbf', c=1.0, g
     y_pred = svm_model.predict(x_val)
 
     return y_pred
+
+def grid_search_(model, X_train, y_train, param_grid, cv = 5, scoring = 'accuracy', random_state = 42) :
+    '''
+    inputs : model, associated parameter grid, cross validation, scoring metric, seed
+    outputs : best parameters and the associated score (accuracy by default)
+    '''
+    grid_search = GridSearchCV(model, param_grid = param_grid, cv = cv, scoring = scoring)
+    grid_search.fit(X_train, y_train)
+    # write code so that it breaks if the param_grid does not match the associated model parameters
+
+    print("Best Parameters:", grid_search.best_params_)
+    print("Best Score:", grid_search.best_score_)
+
+    
