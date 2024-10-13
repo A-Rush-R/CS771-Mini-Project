@@ -1,6 +1,7 @@
 import pandas as pd
 from sklearn.preprocessing import OneHotEncoder
 from typing import Literal
+import numpy as np
 
 def getdfs(data : str, train_size : float = 1):
     '''
