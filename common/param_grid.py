@@ -40,7 +40,7 @@ param_grids = {
         'kernel': ['linear', 'poly', 'rbf', 'sigmoid'],
         'degree': [2, 4],
         'gamma': ['scale', 'auto'],
-        'max_iter': [1000, 5000],
+        'max_iter': [10000],
         'random_state': [42]
     },
     "mnb" : {

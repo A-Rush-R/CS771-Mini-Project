@@ -109,7 +109,7 @@ def predict_svc(x_train, y_train, x_val, grid_search : bool = False, random_stat
     '''
     if grid_search :
         svm_model = SVC(random_state=random_state, kernel=kernel, C=c, gamma=gamma, max_iter=max_iter)
-        best_params = grid_search_(svm_model, x_train, y_train, model_name='svm')
+        best_params = grid_search_(svm_model, x_train, y_train, model_name='svc')
         
         svm_model = SVC(**best_params)
         svm_model.fit(x_train, y_train)
