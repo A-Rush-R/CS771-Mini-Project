@@ -3,6 +3,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.neural_network import MLPClassifier
 from sklearn.svm import SVC
+from sklearn.naive_bayes import MultinomialNB
 from sklearn.model_selection import GridSearchCV
 
 def predict_xgboost(x_train, y_train, x_val, use_label_encoder=False, eval_metric='logloss') :
@@ -71,7 +72,20 @@ def predict_svc(x_train, y_train, x_val, random_state=42, kernel='rbf', c=1.0, g
 
     return y_pred
 
-def grid_search_(model, X_train, y_train, param_grid, cv = 5, scoring = 'accuracy', random_state = 42) :
+def predict_mnb(x_train, y_train, x_val) :
+    '''
+    inputs : training data and validation data in dataframe
+    outputs : validation predictions and truth values
+    '''
+    
+    mnb_model = MultinomialNB()
+    mnb_model.fit(x_train, y_train)
+    
+    y_pred = mnb_model.predict(x_val)
+
+    return y_pred
+
+def grid_search_(model, X_train, y_train, param_grid, cv = 5, scoring = 'accuracy') :
     '''
     inputs : model, associated parameter grid, cross validation, scoring metric, seed
     outputs : best parameters and the associated score (accuracy by default)
