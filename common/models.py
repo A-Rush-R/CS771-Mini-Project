@@ -5,6 +5,7 @@ from sklearn.neural_network import MLPClassifier
 from sklearn.svm import SVC
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.model_selection import GridSearchCV
+from param_grid import param_grids
 
 def predict_xgboost(x_train, y_train, x_val, use_label_encoder=False, eval_metric='logloss') :
     '''
@@ -85,11 +86,18 @@ def predict_mnb(x_train, y_train, x_val) :
 
     return y_pred
 
-def grid_search_(model, X_train, y_train, param_grid, cv = 5, scoring = 'accuracy') :
+def grid_search_(model, X_train, y_train, param_grid = None,model_name : str = None, cv = 5, scoring = 'accuracy') :
     '''
     inputs : model, associated parameter grid, cross validation, scoring metric, seed
     outputs : best parameters and the associated score (accuracy by default)
     '''
+    if param_grid is None :
+        if model_name is None :
+            raise ValueError("Either param_grid or model_name should be provided")
+        elif model_name not in param_grids :
+            raise ValueError("Model name not found in param_grids")
+        param_grid = param_grids[model_name]
+        
     grid_search = GridSearchCV(model, param_grid = param_grid, cv = cv, scoring = scoring)
     grid_search.fit(X_train, y_train)
     # write code so that it breaks if the param_grid does not match the associated model parameters
