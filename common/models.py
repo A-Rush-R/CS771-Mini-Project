@@ -148,7 +148,7 @@ def predict_mnb(x_train, y_train, x_val, grid_search : bool = False, alpha=1.0, 
 
         return y_pred
 
-def grid_search_(model, X_train, y_train, param_grid = None,model_name : str = None, cv = 5, scoring = 'accuracy') :
+def grid_search_(model, X_train, y_train, param_grid = None,model_name : str = None, cv = 5, scoring = 'accuracy', n_jobs = 4) :
     '''
     inputs : model, associated parameter grid, cross validation, scoring metric, seed
     outputs : best parameters and the associated score (accuracy by default)
@@ -160,7 +160,7 @@ def grid_search_(model, X_train, y_train, param_grid = None,model_name : str = N
             raise ValueError("Model name not found in param_grids")
         param_grid = param_grids[model_name]
         
-    grid_search = GridSearchCV(model, param_grid = param_grid, cv = cv, scoring = scoring, n_jobs= -1)
+    grid_search = GridSearchCV(model, param_grid = param_grid, cv = cv, scoring = scoring, n_jobs= n_jobs)
     grid_search.fit(X_train, y_train)
     # write code so that it breaks if the param_grid does not match the associated model parameters
 
