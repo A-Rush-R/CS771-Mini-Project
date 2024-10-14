@@ -98,11 +98,12 @@ def grid_search_(model, X_train, y_train, param_grid = None,model_name : str = N
             raise ValueError("Model name not found in param_grids")
         param_grid = param_grids[model_name]
         
-    grid_search = GridSearchCV(model, param_grid = param_grid, cv = cv, scoring = scoring)
+    grid_search = GridSearchCV(model, param_grid = param_grid, cv = cv, scoring = scoring, n_jobs= -1)
     grid_search.fit(X_train, y_train)
     # write code so that it breaks if the param_grid does not match the associated model parameters
 
     print("Best Parameters:", grid_search.best_params_)
     print("Best Score:", grid_search.best_score_)
-
+    
+    return grid_search.best_params_
     
