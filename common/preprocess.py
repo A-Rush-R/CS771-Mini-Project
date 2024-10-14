@@ -1,6 +1,7 @@
 import pandas as pd
 from sklearn.preprocessing import OneHotEncoder
 from typing import Literal
+import numpy as np
 
 def getdfs(data : str, train_size : float = 1):
     '''
@@ -14,7 +15,7 @@ def getdfs(data : str, train_size : float = 1):
         valid_df = np.load(f"../datasets/valid/valid_{data}.npz")
     else :
         train_df = pd.read_csv(f"../datasets/train/train_{data}.csv")
-        val_df = pd.read_csv(f"../datasets/valid/valid_{data}.csv")
+        valid_df = pd.read_csv(f"../datasets/valid/valid_{data}.csv")
     
     train_df = train_df[:int(len(train_df)*train_size)]
 
@@ -26,9 +27,9 @@ def getdfs(data : str, train_size : float = 1):
 
     if data == 'emoticon':
         train_df = get_char_columns(train_df)
-        val_df = get_char_columns(val_df)
+        valid_df = get_char_columns(valid_df)
 
-    return train_df, val_df
+    return train_df, valid_df
 
 def one_hot_encode(train_df, val_df):
     '''
