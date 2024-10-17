@@ -6,6 +6,7 @@ from sklearn.svm import SVC
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.model_selection import GridSearchCV
 from param_grid import param_grids
+import numpy as np
 
 def predict_xgboost(x_train, y_train, x_val,grid_search : bool = False, use_label_encoder=False, eval_metric='logloss') :
     '''
@@ -99,7 +100,17 @@ def predict_mlp(x_train, y_train, x_val, grid_search : bool = False, max_iter=10
         mlp_model.fit(x_train, y_train)
         
         y_pred = mlp_model.predict(x_val)
+        
+        def count_parameters_sklearn_mlp(model):
+            total_params = 0
+            # Summing number of parameters in each layer (weights + biases)
+            for coef in model.coefs_:
+                total_params += np.prod(coef.shape)  # Number of weights
+            for intercept in model.intercepts_:
+                total_params += intercept.shape[0]  # Number of biases
+            return total_params
 
+        print("Number of parameters in the MLP model: ", count_parameters_sklearn_mlp(mlp_model))
         return y_pred
 
 def predict_svc(x_train, y_train, x_val, grid_search : bool = False, random_state=42, kernel='rbf', c=1.0, gamma='scale', max_iter=1000) :
