@@ -13,7 +13,7 @@ param_grids = {
         'penalty': ['l1', 'l2', 'elasticnet', 'none'],
         'C': [0.01, 1.0, 100.0],
         'solver': ['liblinear', 'saga', 'lbfgs'],
-        'max_iter': [100, 1000],
+        'max_iter': [1000],
         'fit_intercept': [True, False],
         'random_state': [42]
     },
