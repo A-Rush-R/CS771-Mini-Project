@@ -1,6 +1,6 @@
+import typing
 import pandas as pd
 from sklearn.preprocessing import OneHotEncoder
-from typing import Literal
 import numpy as np
 
 def get_char_columns(df):
@@ -24,11 +24,7 @@ def getdfs(data : str, train_size : float = 1):
         valid_df = pd.read_csv(f"../datasets/valid/valid_{data}.csv")
     
     train_df = train_df.iloc[:int(len(train_df)*train_size)]
-
-    # if data == 'emoticon':
-    #     train_df = get_char_columns(train_df)
-    #     valid_df = get_char_columns(valid_df)
-
+    
     return train_df, valid_df
 
 def one_hot_encode(train_df, valid_df):
@@ -51,3 +47,70 @@ def one_hot_encode(train_df, valid_df):
     print(new_train_df.shape, new_valid_df.shape)
     
     return new_train_df, new_valid_df, y_train, y_val
+
+def find_common_characters(strings):
+    # Convert the first string to a set of characters
+    common_chars = set(strings[0])
+
+    # Intersect with characters from all other strings
+    for string in strings[1:]:
+        common_chars &= set(string)
+    
+    return common_chars
+
+def remove_common_characters(strings):
+    new_strings = []
+    
+    common_chars = find_common_characters(strings)
+    
+    for string in strings:
+        # Remove all common characters from the string
+        new_string = ''.join(char for char in string if char not in common_chars)
+        new_strings.append(new_string)
+
+    return new_strings
+
+
+def remove_substrings(input_string, substrings):
+    """
+    Removes all occurrences of substrings from the input string.
+
+    Parameters:
+    input_string (str): The string to remove substrings from.
+    substrings (list): List of substrings to remove from the input string.
+
+    Returns:
+    str: The input string with substrings removed.
+    """
+    for substring in substrings:
+        input_string = input_string.replace(substring, "")
+    return input_string
+
+
+def process_strings ( strs : typing.List[str] )-> typing.List[str]:
+    strs = [x.lstrip('0') for x in strs]
+    
+    repeat_emo_code = {
+        '🙼' : '284',
+        '🛐' : '464', 
+        '🙯' : '262',
+        '😛' : '15436', 
+        '😣' : '614',
+        '😑' : '1596', 
+        '🚼' : '422'
+    }
+
+    # Example usage
+    substrings = repeat_emo_code.values()
+
+    # Remove the substrings
+    strs = [remove_substrings(input_string, substrings) for input_string in strs]
+
+    padded_strs = []
+
+    for s in strs:
+        if len(s) < 15:
+            s = s + '0'*(15-len(s))
+        padded_strs.append(s)
+
+    return padded_strs
