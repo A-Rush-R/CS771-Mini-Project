@@ -6,8 +6,13 @@ import numpy as np
 def get_char_columns(df):
     for i in range(len(df['input_emoticon'][0])):
         df[f'c_{i+1}'] = df['input_emoticon'].apply(lambda x, _i=i: x[_i])
+        
+    columns = df.columns.to_list()
+    if 'label' in columns:
+        columns.remove('label')
+    columns.remove('input_emoticon')
     
-    return df[df.columns.to_list()[2:] + ['label']]
+    return df[columns + (['label'] if 'label' in df.columns else []) ]
 
 def getdfs(data : str, train_size : float = 1):
     '''
