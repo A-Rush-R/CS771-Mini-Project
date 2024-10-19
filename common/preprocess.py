@@ -14,7 +14,7 @@ def get_char_columns(df):
     
     return df[columns + (['label'] if 'label' in df.columns else []) ]
 
-def getdfs(data : str, train_size : float = 1):
+def getdfs(data : str):
     '''
     preprocess and return train_df and val_df
     '''
@@ -27,8 +27,6 @@ def getdfs(data : str, train_size : float = 1):
     else :
         train_df = pd.read_csv(f"../datasets/train/train_{data}.csv")
         valid_df = pd.read_csv(f"../datasets/valid/valid_{data}.csv")
-    
-    train_df = train_df.iloc[:int(len(train_df)*train_size)]
     
     return train_df, valid_df
 
@@ -44,7 +42,7 @@ def one_hot_encode(train_df, valid_df):
     
     oh_encoder = OneHotEncoder(handle_unknown = 'ignore')
     oh_encoder.fit(new_train_df)
-    
+
     
     new_train_df = pd.DataFrame(oh_encoder.transform(new_train_df).toarray())
     new_valid_df = pd.DataFrame(oh_encoder.transform(new_valid_df).toarray())
