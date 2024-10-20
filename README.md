@@ -23,5 +23,12 @@ pip install -r requirements
 
 - Install the dataset, make sure the `datasets/` directory is present in the root
 
+## Approaches
+
+### Datset-1
+
+- Model : Logistic Regression
+- Best Parametres : 
+
 ## References 
 
