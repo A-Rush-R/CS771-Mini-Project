@@ -24,7 +24,7 @@ def predict_xgboost(x_train, y_train, x_val,grid_search : bool = False, eval_met
 
         return y_pred
     else :
-        xgb_model = XGBClassifier(use_label_encoder=use_label_encoder, eval_metric=eval_metric)
+        xgb_model = XGBClassifier(eval_metric=eval_metric)
         xgb_model.fit(x_train, y_train)
         
         y_pred = xgb_model.predict(x_val)
