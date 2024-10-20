@@ -30,17 +30,21 @@ def save_emoticons() :
     
     y_train = train_df['label']
     y_valid = valid_df['label']
-    y_test = test_df['label']
     
-    new_train_df = train_df.drop('label', axis=1)
-    new_valid_df = valid_df.drop('label', axis = 1)
+    train_df = train_df.drop('label', axis=1)
+    valid_df = valid_df.drop('label', axis = 1)
     
     oh_encoder = OneHotEncoder(handle_unknown = 'ignore')
-    oh_encoder.fit(new_train_df)
+    oh_encoder.fit(train_df)
 
     
-    new_train_df = pd.DataFrame(oh_encoder.transform(new_train_df).toarray())
-    new_valid_df = pd.DataFrame(oh_encoder.transform(new_valid_df).toarray())
+    train_df = pd.DataFrame(oh_encoder.transform(train_df).toarray())
+    valid_df = pd.DataFrame(oh_encoder.transform(valid_df).toarray())
+    test_df = pd.DataFrame(oh_encoder.transform(test_df).toarray())
+    
+    train_df = get_char_columns(train_df)
+    valid_df = get_char_columns(valid_df)
+    test_df = get_char_columns(test_df)
     
     # model = 
     model.fit 
