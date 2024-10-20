@@ -10,17 +10,17 @@ param_grids = {
         'eval_metric': ['logloss', 'auc']
     },
     "lr" : {
-        'penalty': ['l1', 'l2', 'elasticnet', 'none'],
+        'penalty': ['l1', 'l2', 'elasticnet'],
         'C': [0.1, 1.0, 10.0],
         'solver': ['liblinear', 'saga', 'lbfgs'],
-        'fit_intercept': [True, False]
+        'fit_intercept': [True]
     },
     "rf" : {
-        'n_estimators': [100, 500, 1000],
+        'n_estimators': [100, 500],
         'max_depth': [None, 10, 30],
         'min_samples_split': [2, 5],
         'min_samples_leaf': [1, 4],
-        'max_features': ['auto', 'sqrt', 'log2'],
+        'max_features': ['sqrt', 'log2'],
         'bootstrap': [True, False]
     },
     "mlp" : {
