@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 from utils import print_accuracy, remove_common_characters, get_char_columns
+from sklearn.preprocessing import OneHotEncoder
 
 def generate_submission_txt(model, x_test, file_name):
     '''
@@ -12,8 +13,6 @@ def generate_submission_txt(model, x_test, file_name):
         for pred in preds:
             f.write(str(pred) + '\n')
     print(f"Submission file generated at {file_name}")
-    
-    return
 
 def save_emoticons() :
     train_df = pd.read_csv('datasets/train/train_emoticon.csv')
@@ -47,10 +46,10 @@ def save_emoticons() :
     test_df = get_char_columns(test_df)
     
     # model = 
-    model.fit 
-    y_pred = model.predict
+    model.fit(x_train, y_train)
+    y_valid_pred = model.predict(x_valid)
     
-    print_accuracy(y_valid, y_pred)
+    print_accuracy(y_valid, y_valid_pred)
     
     generate_submission_txt(model, x_test, file_name='pred_emoticon.txt')
 
@@ -60,11 +59,18 @@ def save_features() :
     valid_df = np.load('datasets/valid/valid_feature.npz', allow_pickle=True)
     test_df = np.load('datasets/test/test_feature.npz', allow_pickle=True)
     
-    # model = 
-    model.fit 
-    y_pred = model.predict
+    x_train = train_df['features']
+    y_train = train_df['label']
+    x_valid = valid_df['features']
+    y_valid = valid_df['label']
     
-    print_accuracy(y_valid, y_pred)
+    x_test = test_df['features']
+    
+    # model = 
+    model.fit(x_train, y_train)
+    y_valid_pred = model.predict(x_valid)
+    
+    print_accuracy(y_valid, y_valid_pred)
     
     generate_submission_txt(model, x_test, file_name='pred_deepfeat.txt')
     
@@ -75,10 +81,10 @@ def save_text_seq() :
     test_df = pd.read_csv('datasets/test/test_text_seq.csv')
     
     # model = 
-    model.fit 
-    y_pred = model.predict
+    model.fit(x_train, y_train)
+    y_valid_pred = model.predict(x_valid)
     
-    print_accuracy(y_valid, y_pred)
+    print_accuracy(y_valid, y_valid_pred)
     
     generate_submission_txt(model, x_test, file_name='pred_text_seq.txt')
 
