@@ -1,6 +1,6 @@
 # CS771-Mini-Project
 
-This respositry consists of the submission for the First Mini Project for the course CS771, Fall 2024, completed under the instruction of Prof. Piyush Rai, Department of CSE, IIT Kanpur
+This respositry consists of the submission for the First Mini Project for the course [CS771](https://web.cse.iitk.ac.in/users/piyush/courses/ml-autumn24/index.html), Fall 2024, completed under the instruction of Prof. Piyush Rai, Department of CSE, IIT Kanpur
 
 ## Team 
 
