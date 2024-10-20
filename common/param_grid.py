@@ -11,11 +11,9 @@ param_grids = {
     },
     "lr" : {
         'penalty': ['l1', 'l2', 'elasticnet', 'none'],
-        'C': [0.01, 1.0, 100.0],
+        'C': [0.1, 1.0, 10.0],
         'solver': ['liblinear', 'saga', 'lbfgs'],
-        'max_iter': [1000],
-        'fit_intercept': [True, False],
-        'random_state': [42]
+        'fit_intercept': [True, False]
     },
     "rf" : {
         'n_estimators': [100, 500, 1000],
@@ -23,24 +21,19 @@ param_grids = {
         'min_samples_split': [2, 5],
         'min_samples_leaf': [1, 4],
         'max_features': ['auto', 'sqrt', 'log2'],
-        'bootstrap': [True, False],
-        'random_state': [42]
+        'bootstrap': [True, False]
     },
     "mlp" : {
-        'hidden_layer_sizes': [(50,50), (100,50), (100,100,50), (200,100)],
         'activation': ['tanh', 'relu'],
-        'solver': ['adam', 'sgd'],
+        'solver': ['adam'],
         'alpha': [0.0001, 0.01],
-        'learning_rate': ['constant', 'adaptive'],
-        'max_iter': [500, 2000],
-        'random_state': [42]
+        'learning_rate': ['adaptive']
     },
     "svc" : {
         'C': [0.1, 10],
         'kernel': ['linear', 'poly', 'rbf', 'sigmoid'],
         'degree': [2, 4],
         'gamma': ['scale', 'auto'],
-        'max_iter': [10000],
         'random_state': [42]
     },
     "mnb" : {

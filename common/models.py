@@ -32,7 +32,7 @@ def predict_xgboost(x_train, y_train, x_val,grid_search : bool = False, use_labe
         return y_pred
 
 
-def predict_logistic_regression(x_train, y_train, x_val,grid_search : bool = False, max_iter=1000, random_state=42) :
+def predict_logistic_regression(x_train, y_train, x_val,grid_search : bool = False, max_iter=10000, random_state=42) :
     '''
     inputs : training data and validation data in dataframe
     outputs : validation predictions and truth values
@@ -41,7 +41,7 @@ def predict_logistic_regression(x_train, y_train, x_val,grid_search : bool = Fal
         lr_model = LogisticRegression(max_iter=max_iter, random_state=random_state)
         best_params = grid_search_(lr_model, x_train, y_train, model_name='lr')
         
-        lr_model = LogisticRegression(**best_params)
+        lr_model = LogisticRegression(**best_params, max_iter=max_iter, random_state=random_state)
         lr_model.fit(x_train, y_train)
         
         y_pred = lr_model.predict(x_val)
@@ -65,7 +65,7 @@ def predict_random_forest(x_train, y_train, x_val, grid_search : bool = False, n
         rf_model = RandomForestClassifier(n_estimators=n_estimators, random_state=random_state, min_samples_leaf=min_samples_leaf, max_features=max_features)
         best_params = grid_search_(rf_model, x_train, y_train, model_name='rf')
         
-        rf_model = RandomForestClassifier(**best_params)
+        rf_model = RandomForestClassifier(**best_params, random_state=random_state)
         rf_model.fit(x_train, y_train)
         
         y_pred = rf_model.predict(x_val)
@@ -79,7 +79,7 @@ def predict_random_forest(x_train, y_train, x_val, grid_search : bool = False, n
 
         return y_pred
 
-def predict_mlp(x_train, y_train, x_val, grid_search : bool = False, max_iter=1000, random_state=42, hidden_layer_sizes=(100,50)) :
+def predict_mlp(x_train, y_train, x_val, grid_search : bool = False, max_iter=10000, random_state=42, hidden_layer_sizes=(16,)) :
     '''
     inputs : training data and validation data in dataframe
     outputs : validation predictions and truth values
@@ -88,7 +88,7 @@ def predict_mlp(x_train, y_train, x_val, grid_search : bool = False, max_iter=10
         mlp_model = MLPClassifier(max_iter=max_iter, random_state=random_state, hidden_layer_sizes=hidden_layer_sizes)
         best_params = grid_search_(mlp_model, x_train, y_train, model_name='mlp')
         
-        mlp_model = MLPClassifier(**best_params)
+        mlp_model = MLPClassifier(**best_params, max_iter=max_iter, random_state=random_state)
         mlp_model.fit(x_train, y_train)
         
         y_pred = mlp_model.predict(x_val)
@@ -113,7 +113,7 @@ def predict_mlp(x_train, y_train, x_val, grid_search : bool = False, max_iter=10
         print("Number of parameters in the MLP model: ", count_parameters_sklearn_mlp(mlp_model))
         return y_pred
 
-def predict_svc(x_train, y_train, x_val, grid_search : bool = False, random_state=42, kernel='rbf', c=1.0, gamma='scale', max_iter=1000) :
+def predict_svc(x_train, y_train, x_val, grid_search : bool = False, random_state=42, kernel='rbf', c=1.0, gamma='scale', max_iter=10000) :
     '''
     inputs : training data and validation data in dataframe
     outputs : validation predictions and truth values
