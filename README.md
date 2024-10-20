@@ -12,7 +12,15 @@ This respositry consists of the submission for the First Mini Project for the co
 | Pahal Dhruvin Patel | 220742 |
 | Pranav Agrawal | 220791 |
 
-## Contents 
+## Contents
+
+- `main.py` : main file to generate and save predictions
+- `pred_emoticon.txt` : predictions for the emoticons dataset
+- `pred_deepfeat.txt` : predictions for the deep features dataset
+- `pred_text_seq.txt` : predictions for the text sequences dataset
+- `emoticons/` : jupyter notebooks containing experiments and EDA for emoticons dataset
+- `features/` : jupyter notebooks containing experiments and EDA for features dataset
+- `text_seq/` : jupyter notebooks containing experiments and EDA for text sequences dataset
 
 ## Instructions
 
@@ -23,12 +31,35 @@ pip install -r requirements
 
 - Install the dataset, make sure the `datasets/` directory is present in the root
 
+- Run `main.py` to generate the prediction files &rarr;
+```bash
+python main.py
+```
+
 ## Approaches
 
 ### Datset-1
 
 - Model : Logistic Regression
 - Best Parametres : 
+- Achieved Accuracy on Validation Set :
+
+### Datset-2
+
+- Model : Logistic Regression
+- Best Parametres : 
+- Achieved Accuracy on Validation Set :
+
+### Datset-3
+
+- Model : Logistic Regression
+- Best Parametres : 
+- Achieved Accuracy on Validation Set :
+
+### Task 2
+- Model : Logistic Regression
+- Best Parametres : 
+- Achieved Accuracy on Validation Set :
 
 ## References 
 
