@@ -33,8 +33,7 @@ param_grids = {
         'C': [0.1, 10],
         'kernel': ['linear', 'poly', 'rbf', 'sigmoid'],
         'degree': [2, 4],
-        'gamma': ['scale', 'auto'],
-        'random_state': [42]
+        'gamma': ['scale', 'auto']
     },
     "mnb" : {
         'alpha': [0.1, 0.5, 1.0, 2.0, 5.0],
