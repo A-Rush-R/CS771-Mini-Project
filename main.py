@@ -49,7 +49,7 @@ def save_emoticons() :
     model.fit(x_train, y_train)
     y_valid_pred = model.predict(x_valid)
     
-    print_accuracy(y_valid, y_valid_pred)
+    print_accuracy(y_valid, y_valid_pred, title = "Emoticons Validation Set")
     
     generate_submission_txt(model, x_test, file_name='pred_emoticon.txt')
 
@@ -70,7 +70,7 @@ def save_features() :
     model.fit(x_train, y_train)
     y_valid_pred = model.predict(x_valid)
     
-    print_accuracy(y_valid, y_valid_pred)
+    print_accuracy(y_valid, y_valid_pred, title = "Features Validation Set")
     
     generate_submission_txt(model, x_test, file_name='pred_deepfeat.txt')
     
@@ -84,7 +84,7 @@ def save_text_seq() :
     model.fit(x_train, y_train)
     y_valid_pred = model.predict(x_valid)
     
-    print_accuracy(y_valid, y_valid_pred)
+    print_accuracy(y_valid, y_valid_pred, title = "Text Sequences Validation Set")
     
     generate_submission_txt(model, x_test, file_name='pred_text_seq.txt')
 
