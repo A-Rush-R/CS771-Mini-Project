@@ -1,6 +1,6 @@
 import numpy as np
 import pandas as pd
-from sklearn.metrics import accuracy_score
+from utils import print_accuracy, remove_common_characters, get_char_columns
 
 def generate_submission_txt(model, x_test, file_name):
     '''
@@ -20,24 +20,47 @@ def save_emoticons() :
     valid_df = pd.read_csv('datasets/valid/valid_emoticon.csv')
     test_df = pd.read_csv('datasets/test/test_emoticon.csv')
     
-    model = ??
+    train_df['input_emoticon'] = remove_common_characters(train_df['input_emoticon'])
+    valid_df['input_emoticon'] = remove_common_characters(valid_df['input_emoticon'])
+    test_df['input_emoticon'] = remove_common_characters(test_df['input_emoticon'])
+
+    train_df = get_char_columns(train_df)
+    valid_df = get_char_columns(valid_df)
+    test_df = get_char_columns(test_df)
+    
+    y_train = train_df['label']
+    y_valid = valid_df['label']
+    y_test = test_df['label']
+    
+    new_train_df = train_df.drop('label', axis=1)
+    new_valid_df = valid_df.drop('label', axis = 1)
+    
+    oh_encoder = OneHotEncoder(handle_unknown = 'ignore')
+    oh_encoder.fit(new_train_df)
+
+    
+    new_train_df = pd.DataFrame(oh_encoder.transform(new_train_df).toarray())
+    new_valid_df = pd.DataFrame(oh_encoder.transform(new_valid_df).toarray())
+    
+    # model = 
     model.fit 
     y_pred = model.predict
     
-    print("Accuracy Score for validaition set :", accuracy_score(y_valid, y_pred))
+    print_accuracy(y_valid, y_pred)
     
     generate_submission_txt(model, x_test, file_name='pred_emoticon.txt')
+
     
 def save_features() :
     train_df = np.load('datasets/train/train_feature.npz', allow_pickle=True)
-    valid_df = np.load('datasets/valid/valid_feature.npz', allow_pickle=True))
-    test_df = np.load('datasets/test/test_feature.npz', allow_pickle=True))
+    valid_df = np.load('datasets/valid/valid_feature.npz', allow_pickle=True)
+    test_df = np.load('datasets/test/test_feature.npz', allow_pickle=True)
     
-    model = ??
+    # model = 
     model.fit 
     y_pred = model.predict
     
-    print("Accuracy Score for validaition set :", accuracy_score(y_valid, y_pred))
+    print_accuracy(y_valid, y_pred)
     
     generate_submission_txt(model, x_test, file_name='pred_deepfeat.txt')
     
@@ -47,11 +70,11 @@ def save_text_seq() :
     valid_df = pd.read_csv('datasets/valid/valid_text_seq.csv')
     test_df = pd.read_csv('datasets/test/test_text_seq.csv')
     
-    model = ??
+    # model = 
     model.fit 
     y_pred = model.predict
     
-    print("Accuracy Score for validaition set :", accuracy_score(y_valid, y_pred))
+    print_accuracy(y_valid, y_pred)
     
     generate_submission_txt(model, x_test, file_name='pred_text_seq.txt')
 
