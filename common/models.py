@@ -8,16 +8,16 @@ from sklearn.model_selection import GridSearchCV
 from param_grid import param_grids
 import numpy as np
 
-def predict_xgboost(x_train, y_train, x_val,grid_search : bool = False, use_label_encoder=False, eval_metric='logloss') :
+def predict_xgboost(x_train, y_train, x_val,grid_search : bool = False, eval_metric='logloss') :
     '''
     inputs : training data and validation data in dataframe
     outputs : validation predictions and truth values
     '''
     if grid_search :
-        xgb_model = XGBClassifier(use_label_encoder=use_label_encoder, eval_metric=eval_metric)
+        xgb_model = XGBClassifier(eval_metric=eval_metric)
         best_params = grid_search_(xgb_model, x_train, y_train, model_name='xgb')
         
-        xgb_model = XGBClassifier(use_label_encoder=use_label_encoder, **best_params)
+        xgb_model = XGBClassifier(**best_params)
         xgb_model.fit(x_train, y_train)
         
         y_pred = xgb_model.predict(x_val)
@@ -122,7 +122,7 @@ def predict_svc(x_train, y_train, x_val, grid_search : bool = False, random_stat
         svm_model = SVC(random_state=random_state, kernel=kernel, C=c, gamma=gamma, max_iter=max_iter)
         best_params = grid_search_(svm_model, x_train, y_train, model_name='svc')
         
-        svm_model = SVC(**best_params)
+        svm_model = SVC(**best_params, random_state=random_state)
         svm_model.fit(x_train, y_train)
         
         y_pred = svm_model.predict(x_val)
