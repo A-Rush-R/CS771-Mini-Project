@@ -40,6 +40,17 @@ def get_char_columns(df):
 def process_strings(strs: typing.List[str]) -> typing.List[str]:
     strs = [x.lstrip("0") for x in strs]
 
+    #FIXME : evaluate repeating substrings from the strings, not using the encodding mapping
+    repeat_emo_code = {
+        '🙼' : '284',
+        '🛐' : '464', 
+        '🙯' : '262',
+        '😛' : '15436', 
+        '😣' : '614',
+        '😑' : '1596', 
+        '🚼' : '422'
+    }
+
     # Example usage
     substrings = repeat_emo_code.values()
 
