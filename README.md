@@ -106,7 +106,5 @@ python 17.py
 
 - Achieved Accuracy on Validation Set : **98.77%**
 
-We used the seed 42 for all the probabilistic models that we attempted to run.  
-
-## References 
+We used the seed 42 for all the probabilistic models that we attempted to run.
 
