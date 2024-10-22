@@ -91,9 +91,6 @@ def save_features():
     print_delimiter()
     
 def save_text_seq():
-    emo_train_df = pd.read_csv("datasets/train/train_emoticon.csv")
-    repeat_emos = find_common_characters(emo_train_df["input_emoticon"])
-
     train_df = pd.read_csv("datasets/train/train_text_seq.csv")
     valid_df = pd.read_csv("datasets/valid/valid_text_seq.csv")
     test_df = pd.read_csv("datasets/test/test_text_seq.csv")
