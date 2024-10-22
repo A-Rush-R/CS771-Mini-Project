@@ -93,3 +93,5 @@ def get_columns(df, num_feat):
         df[f"c_{i}"] = df["input_str"].apply(lambda x: x[i])
     return df.drop(columns=["input_str"])
 
+def print_delimiter() :
+    print("=========================================")

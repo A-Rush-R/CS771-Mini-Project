@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-from utils import print_accuracy, remove_common_characters, get_char_columns, find_common_characters, process_strings
+from utils import print_accuracy, remove_common_characters, get_char_columns, find_common_characters, process_strings, print_delimiter
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.linear_model import LogisticRegression
 from xgboost import XGBClassifier
@@ -16,6 +16,7 @@ def generate_submission_txt(model, x_test, file_name):
         for pred in preds:
             f.write(str(pred) + '\n')
     print(f"Submission file generated at {file_name}")
+    print_delimiter()
 
 def save_emoticons() :
     train_df = pd.read_csv('datasets/train/train_emoticon.csv')
@@ -53,6 +54,7 @@ def save_emoticons() :
     print_accuracy(y_valid, y_valid_pred, title = "emoticons dataset")
     
     generate_submission_txt(model, x_test, file_name='pred_emoticon.txt')
+    print_delimiter()
 
 def save_features() :
     train_df = np.load('datasets/train/train_feature.npz', allow_pickle=True)
@@ -77,6 +79,7 @@ def save_features() :
     print_accuracy(y_valid, y_valid_pred, title = "features dataset")
     
     generate_submission_txt(model, x_test, file_name='pred_deepfeat.txt')
+    print_delimiter()
     
 def save_text_seq() :
     emo_train_df = pd.read_csv('datasets/train/train_emoticon.csv')
@@ -108,9 +111,10 @@ def save_text_seq() :
     model.fit(x_train, y_train)
     y_valid_pred = model.predict(x_valid)
     
-    print_accuracy(y_valid, y_valid_pred)
+    print_accuracy(y_valid, y_valid_pred, title = "text sequences dataset")
     
     generate_submission_txt(model, x_test, file_name='pred_text_seq.txt')
+    print_delimiter()
 
 if __name__ == "__main__" :
     
