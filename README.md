@@ -43,6 +43,10 @@ python main.py
 
 ### Dataset-1
 
+- Preprocessing : 
+    1. Removed dummy emojis, that are occuring in all the input emoji strings
+    2. Columnarised the emoji strings into one column per character
+    3. One hot encoded the categorical columns
 - Model : Logistic Regression
 - Best Parametres 
 
@@ -56,6 +60,7 @@ python main.py
 
 ### Dataset-2
 
+- Preprocessing : None
 - Model : Logistic Regression
 - Best Parametres
     |**Parameter**|**Value**|
@@ -69,6 +74,9 @@ python main.py
 
 ### Dataset-3
 
+- Preprocessing
+    1. Removed substrings occuring in all the input strings
+    2. Converted the input strings into n-gram respresentation, with $n_range = (3, 5)$
 - Model : Logistic Regression
 - Best Parametres 
 
