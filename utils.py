@@ -29,6 +29,7 @@ def remove_common_characters(strings):
         
 def print_accuracy(y_valid, y_pred, title : str = 'model') :
     print(f"Accuracy for {title} is {accuracy_score(y_valid, y_pred)}")
+    print("==================================================")
 
 def get_char_columns(df):
     '''
