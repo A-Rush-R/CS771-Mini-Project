@@ -36,7 +36,8 @@ pip install -r requirements.txt
 
 - Run `main.py` to generate the prediction files &rarr;
 ```bash
-python main.py ```
+python main.py
+```
 
 ## Approaches
 
@@ -51,7 +52,7 @@ python main.py ```
     | penalty| L1|
     |Solver| Liblinear|
 
-- Achieved Accuracy on Validation Set : 97.13%
+- Achieved Accuracy on Validation Set : **97.13%**
 
 ### Dataset-2
 
@@ -64,7 +65,7 @@ python main.py ```
     | penalty | l2 |
     | solver | lbfgs |
     
-- Achieved Accuracy on Validation Set : 98.77%
+- Achieved Accuracy on Validation Set : **98.77%**
 
 ### Dataset-3
 
@@ -82,7 +83,7 @@ python main.py ```
     | n_estimators | 500 |
     | subsample | 1.0 |
 
-- Achieved Accuracy on Validation Set : 93.05%
+- Achieved Accuracy on Validation Set : **93.05%**
 
 ### Task 2
 - Model : Logistic Regression
@@ -95,7 +96,7 @@ python main.py ```
     | penalty | l2 |
     | solver | lbfgs |
 
-- Achieved Accuracy on Validation Set : 93.05%
+- Achieved Accuracy on Validation Set : **93.05%**
 
 We used the seed 42 for all the probabilistic models that we attempted to run.  
 
