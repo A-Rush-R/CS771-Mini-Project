@@ -14,8 +14,8 @@ This respositry consists of the submission for the First Mini Project for the co
 
 ## Contents
 
-- `main.py` : main file to generate and save predictions
-- `utils.py` : utility functions used in `main.py`
+- `17.py` : 17 file to generate and save predictions
+- `utils.py` : utility functions used in `17.py`
 - `pred_emoticon.txt` : predictions for the emoticons dataset
 - `pred_deepfeat.txt` : predictions for the deep features dataset
 - `pred_text_seq.txt` : predictions for the text sequences dataset
@@ -34,9 +34,9 @@ pip install -r requirements.txt
 
 - Download the dataset, make sure the `datasets/` directory is present in the root
 
-- Run `main.py` to generate the prediction files &rarr;
+- Run `17.py` to generate the prediction files &rarr;
 ```bash
-python main.py
+python 17.py
 ```
 
 ## Approaches
