@@ -14,7 +14,7 @@ This respositry consists of the submission for the First Mini Project for the co
 
 ## Contents
 
-- `17.py` : 17 file to generate and save predictions
+- `17.py` : main file to generate and save predictions
 - `utils.py` : utility functions used in `17.py`
 - `pred_emoticon.txt` : predictions for the emoticons dataset
 - `pred_deepfeat.txt` : predictions for the deep features dataset
