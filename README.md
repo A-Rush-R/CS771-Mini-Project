@@ -15,26 +15,28 @@ This respositry consists of the submission for the First Mini Project for the co
 ## Contents
 
 - `main.py` : main file to generate and save predictions
+- `utils.py` : utility functions used in `main.py`
 - `pred_emoticon.txt` : predictions for the emoticons dataset
 - `pred_deepfeat.txt` : predictions for the deep features dataset
 - `pred_text_seq.txt` : predictions for the text sequences dataset
 - `emoticons/` : jupyter notebooks containing experiments and EDA for emoticons dataset
 - `features/` : jupyter notebooks containing experiments and EDA for features dataset
 - `text_seq/` : jupyter notebooks containing experiments and EDA for text sequences dataset
+- `combined/` : jupter notebooks containing experiments and EDA for all datasets combined
+- `common/` : helper functions used in experiments
 
 ## Instructions
 
 - Install the dependencies
 ```bash
-pip install -r requirements
+pip install -r requirements.txt
 ```
 
 - Install the dataset, make sure the `datasets/` directory is present in the root
 
 - Run `main.py` to generate the prediction files &rarr;
 ```bash
-python main.py
-```
+python main.py ```
 
 ## Approaches
 
