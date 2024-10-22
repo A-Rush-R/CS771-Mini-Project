@@ -63,11 +63,6 @@ def save_emoticons():
     
     generate_submission_txt(model, x_test, file_name='pred_emoticon.txt')
     print_delimiter()
-    model.fit(x_train, y_train)
-
-    print_accuracy(y_valid, y_valid_pred)
-
-    generate_submission_txt(model, x_test, file_name="pred_emoticon.txt")
 
 
 def save_features():
@@ -132,20 +127,37 @@ def save_text_seq():
     }
     model = XGBClassifier(**params)
     model.fit(x_train, y_train)
-    y_valid_pred = model.predict(x_valid)
-<<<<<<< HEAD
-    
+    y_valid_pred = model.predict(x_valid)    
     print_accuracy(y_valid, y_valid_pred, title = "text sequences dataset")
     
     generate_submission_txt(model, x_test, file_name='pred_text_seq.txt')
     print_delimiter()
 
-def save_combined():
-    # model =
+def save_combined() :
+    # same as save_features()
+    train_df = np.load("datasets/train/train_feature.npz", allow_pickle=True)
+    valid_df = np.load("datasets/valid/valid_feature.npz", allow_pickle=True)
+    test_df = np.load("datasets/test/test_feature.npz", allow_pickle=True)
 
-    print_accuracy(y_valid, y_valid_pred)
-    generate_submission_txt(model, x_test, file_name="pred_combined.txt")
+    x_train = train_df["features"]
+    y_train = train_df["label"]
+    x_valid = valid_df["features"]
+    y_valid = valid_df["label"]
+    x_test = test_df["features"]
 
+    x_train = x_train.reshape(x_train.shape[0], -1)
+    x_valid = x_valid.reshape(x_valid.shape[0], -1)
+    x_test = x_test.reshape(x_test.shape[0], -1)
+
+    params = {'C': 10.0, 'fit_intercept': True, 'penalty': 'l2', 'solver': 'lbfgs'}
+    model = LogisticRegression(**params, max_iter= 10000, random_state = 42)
+    model.fit(x_train, y_train)
+    y_valid_pred = model.predict(x_valid)
+    
+    print_accuracy(y_valid, y_valid_pred, title = "combined")
+    
+    generate_submission_txt(model, x_test, file_name='pred_combined.txt')
+    print_delimiter()
 
 if __name__ == "__main__":
     save_emoticons()
