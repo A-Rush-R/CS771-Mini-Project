@@ -48,6 +48,7 @@ python main.py
     | C | 10|
     | penalty| L1|
     |Solver| Liblinear|
+
 - Achieved Accuracy on Validation Set : 97.13%
 
 ### Dataset-2
@@ -61,12 +62,12 @@ python main.py
     | penalty | l2 |
     | solver | lbfgs |
     
-- Achieved Accuracy on Validation Set :
+- Achieved Accuracy on Validation Set : 98.77%
 
 ### Dataset-3
 
 - Model : Logistic Regression
-- Best Parametres ''
+- Best Parametres 
 
     |**Parameter**|**Value**|
     |-------------|---------|
@@ -78,13 +79,23 @@ python main.py
     | min_child_weight | 3 |
     | n_estimators | 500 |
     | subsample | 1.0 |
-- Achieved Accuracy on Validation Set :
+
+- Achieved Accuracy on Validation Set : 93.05%
 
 ### Task 2
 - Model : Logistic Regression
 - Best Parametres : 
-- Achieved Accuracy on Validation Set :
+
+    |**Parameter**|**Value**|
+    |-------------|---------|
+    | C | 10.0 |
+    | fit_intercept | True |
+    | penalty | l2 |
+    | solver | lbfgs |
+
+- Achieved Accuracy on Validation Set : 93.05%
 
 We used the seed 42 for all the probabilistic models that we attempted to run.  
+
 ## References 
 
