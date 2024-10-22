@@ -32,7 +32,7 @@ This respositry consists of the submission for the First Mini Project for the co
 pip install -r requirements.txt
 ```
 
-- Install the dataset, make sure the `datasets/` directory is present in the root
+- Download the dataset, make sure the `datasets/` directory is present in the root
 
 - Run `main.py` to generate the prediction files &rarr;
 ```bash
