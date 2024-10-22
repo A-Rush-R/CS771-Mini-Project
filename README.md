@@ -104,7 +104,7 @@ python main.py
     | penalty | l2 |
     | solver | lbfgs |
 
-- Achieved Accuracy on Validation Set : **93.05%**
+- Achieved Accuracy on Validation Set : **98.77%**
 
 We used the seed 42 for all the probabilistic models that we attempted to run.  
 
