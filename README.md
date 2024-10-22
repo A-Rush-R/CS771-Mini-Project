@@ -15,18 +15,21 @@ This respositry consists of the submission for the First Mini Project for the co
 ## Contents
 
 - `main.py` : main file to generate and save predictions
+- `utils.py` : utility functions used in `main.py`
 - `pred_emoticon.txt` : predictions for the emoticons dataset
 - `pred_deepfeat.txt` : predictions for the deep features dataset
 - `pred_text_seq.txt` : predictions for the text sequences dataset
 - `emoticons/` : jupyter notebooks containing experiments and EDA for emoticons dataset
 - `features/` : jupyter notebooks containing experiments and EDA for features dataset
 - `text_seq/` : jupyter notebooks containing experiments and EDA for text sequences dataset
+- `combined/` : jupter notebooks containing experiments and EDA for all datasets combined
+- `common/` : helper functions used in experiments
 
 ## Instructions
 
 - Install the dependencies
 ```bash
-pip install -r requirements
+pip install -r requirements.txt
 ```
 
 - Install the dataset, make sure the `datasets/` directory is present in the root
@@ -49,7 +52,7 @@ python main.py
     | penalty| L1|
     |Solver| Liblinear|
 
-- Achieved Accuracy on Validation Set : 97.13%
+- Achieved Accuracy on Validation Set : **97.13%**
 
 ### Dataset-2
 
@@ -62,7 +65,7 @@ python main.py
     | penalty | l2 |
     | solver | lbfgs |
     
-- Achieved Accuracy on Validation Set : 98.77%
+- Achieved Accuracy on Validation Set : **98.77%**
 
 ### Dataset-3
 
@@ -80,7 +83,7 @@ python main.py
     | n_estimators | 500 |
     | subsample | 1.0 |
 
-- Achieved Accuracy on Validation Set : 93.05%
+- Achieved Accuracy on Validation Set : **93.05%**
 
 ### Task 2
 - Model : Logistic Regression
@@ -93,7 +96,7 @@ python main.py
     | penalty | l2 |
     | solver | lbfgs |
 
-- Achieved Accuracy on Validation Set : 93.05%
+- Achieved Accuracy on Validation Set : **93.05%**
 
 We used the seed 42 for all the probabilistic models that we attempted to run.  
 
