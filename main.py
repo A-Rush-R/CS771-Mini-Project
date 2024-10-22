@@ -6,6 +6,7 @@ from utils import (
     get_char_columns,
     find_common_characters,
     process_strings,
+    print_delimiter,
 )
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.linear_model import LogisticRegression
@@ -23,6 +24,7 @@ def generate_submission_txt(model, x_test, file_name):
         for pred in preds:
             f.write(str(pred) + "\n")
     print(f"Submission file generated at {file_name}")
+    print_delimiter()
 
 
 def save_emoticons():
@@ -53,9 +55,15 @@ def save_emoticons():
 
     params = {"C": 10, "penalty": "l1", "solver": "liblinear"}
 
-    model = LogisticRegression(**params, max_iter=10000)
+    model = LogisticRegression(**params, max_iter= 10000, random_state = 42)
     model.fit(x_train, y_train)
     y_valid_pred = model.predict(x_valid)
+    
+    print_accuracy(y_valid, y_valid_pred, title = "emoticons dataset")
+    
+    generate_submission_txt(model, x_test, file_name='pred_emoticon.txt')
+    print_delimiter()
+    model.fit(x_train, y_train)
 
     print_accuracy(y_valid, y_valid_pred)
 
@@ -77,16 +85,16 @@ def save_features():
     x_valid = x_valid.reshape(x_valid.shape[0], -1)
     x_test = x_test.reshape(x_test.shape[0], -1)
 
-    params = {"C": 10.0, "fit_intercept": True, "penalty": "l2", "solver": "lbfgs"}
-    model = LogisticRegression(**params, max_iter=1000)
+    params = {'C': 10.0, 'fit_intercept': True, 'penalty': 'l2', 'solver': 'lbfgs'}
+    model = LogisticRegression(**params, max_iter= 10000, random_state = 42)
     model.fit(x_train, y_train)
     y_valid_pred = model.predict(x_valid)
-
-    print_accuracy(y_valid, y_valid_pred)
-
-    generate_submission_txt(model, x_test, file_name="pred_deepfeat.txt")
-
-
+    
+    print_accuracy(y_valid, y_valid_pred, title = "features dataset")
+    
+    generate_submission_txt(model, x_test, file_name='pred_deepfeat.txt')
+    print_delimiter()
+    
 def save_text_seq():
     emo_train_df = pd.read_csv("datasets/train/train_emoticon.csv")
     repeat_emos = find_common_characters(emo_train_df["input_emoticon"])
@@ -125,11 +133,12 @@ def save_text_seq():
     model = XGBClassifier(**params)
     model.fit(x_train, y_train)
     y_valid_pred = model.predict(x_valid)
-
-    print_accuracy(y_valid, y_valid_pred)
-
-    generate_submission_txt(model, x_test, file_name="pred_text_seq.txt")
-
+<<<<<<< HEAD
+    
+    print_accuracy(y_valid, y_valid_pred, title = "text sequences dataset")
+    
+    generate_submission_txt(model, x_test, file_name='pred_text_seq.txt')
+    print_delimiter()
 
 def save_combined():
     # model =
