@@ -40,28 +40,64 @@ python main.py ```
 
 ## Approaches
 
-### Datset-1
+### Dataset-1
 
 - Model : Logistic Regression
-- Best Parametres : 
-- Achieved Accuracy on Validation Set :
+- Best Parametres 
 
-### Datset-2
+    |**Parameter**|**Value**|
+    |-------------|---------|
+    | C | 10|
+    | penalty| L1|
+    |Solver| Liblinear|
+
+- Achieved Accuracy on Validation Set : 97.13%
+
+### Dataset-2
 
 - Model : Logistic Regression
-- Best Parametres : 
-- Achieved Accuracy on Validation Set :
+- Best Parametres
+    |**Parameter**|**Value**|
+    |-------------|---------|
+    | C | 10.0 |
+    | fit_intercept | True |
+    | penalty | l2 |
+    | solver | lbfgs |
+    
+- Achieved Accuracy on Validation Set : 98.77%
 
-### Datset-3
+### Dataset-3
 
 - Model : Logistic Regression
-- Best Parametres : 
-- Achieved Accuracy on Validation Set :
+- Best Parametres 
+
+    |**Parameter**|**Value**|
+    |-------------|---------|
+    | colsample_bytree | 1.0 |
+    | eval_metric | logloss |
+    | gamma | 0.2 |
+    | learning_rate | 0.1 |
+    | max_depth | 7 |
+    | min_child_weight | 3 |
+    | n_estimators | 500 |
+    | subsample | 1.0 |
+
+- Achieved Accuracy on Validation Set : 93.05%
 
 ### Task 2
 - Model : Logistic Regression
 - Best Parametres : 
-- Achieved Accuracy on Validation Set :
+
+    |**Parameter**|**Value**|
+    |-------------|---------|
+    | C | 10.0 |
+    | fit_intercept | True |
+    | penalty | l2 |
+    | solver | lbfgs |
+
+- Achieved Accuracy on Validation Set : 93.05%
+
+We used the seed 42 for all the probabilistic models that we attempted to run.  
 
 ## References 
 
