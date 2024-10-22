@@ -46,11 +46,11 @@ def save_emoticons() :
     
     params = {'C': 10, 'penalty': 'l1', 'solver': 'liblinear'}
 
-    model = LogisticRegression(**params, max_iter= 10000)
+    model = LogisticRegression(**params, max_iter= 10000, random_state = 42)
     model.fit(x_train, y_train)
     y_valid_pred = model.predict(x_valid)
     
-    print_accuracy(y_valid, y_valid_pred)
+    print_accuracy(y_valid, y_valid_pred, title = "emoticons dataset")
     
     generate_submission_txt(model, x_test, file_name='pred_emoticon.txt')
 
@@ -70,11 +70,11 @@ def save_features() :
     x_test = x_test.reshape(x_test.shape[0], -1)
 
     params = {'C': 10.0, 'fit_intercept': True, 'penalty': 'l2', 'solver': 'lbfgs'}
-    model = LogisticRegression(**params, max_iter= 1000)
+    model = LogisticRegression(**params, max_iter= 10000, random_state = 42)
     model.fit(x_train, y_train)
     y_valid_pred = model.predict(x_valid)
     
-    print_accuracy(y_valid, y_valid_pred)
+    print_accuracy(y_valid, y_valid_pred, title = "features dataset")
     
     generate_submission_txt(model, x_test, file_name='pred_deepfeat.txt')
     
