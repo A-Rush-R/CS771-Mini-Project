@@ -1,8 +1,10 @@
-import numpy as np
 import pandas as pd
-from utils import print_accuracy, remove_common_characters, get_char_columns, find_common_characters, process_strings, get_columns
+import numpy as np
+from utils import print_accuracy, remove_common_characters, get_char_columns, find_common_characters, process_strings
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.linear_model import LogisticRegression
+from xgboost import XGBClassifier
+from sklearn.feature_extraction.text import CountVectorizer
 
 def generate_submission_txt(model, x_test, file_name):
     '''
@@ -52,7 +54,6 @@ def save_emoticons() :
     
     generate_submission_txt(model, x_test, file_name='pred_emoticon.txt')
 
-
 def save_features() :
     train_df = np.load('datasets/train/train_feature.npz', allow_pickle=True)
     valid_df = np.load('datasets/valid/valid_feature.npz', allow_pickle=True)
@@ -61,12 +62,15 @@ def save_features() :
     x_train = train_df['features']
     y_train = train_df['label']
     x_valid = valid_df['features']
-    x_valid = valid_df['features']
     y_valid = valid_df['label']
-    
     x_test = test_df['features']
     
-    # model = 
+    x_train = x_train.reshape(x_train.shape[0], -1)
+    x_valid = x_valid.reshape(x_valid.shape[0], -1)
+    x_test = x_test.reshape(x_test.shape[0], -1)
+
+    params = {'C': 10.0, 'fit_intercept': True, 'penalty': 'l2', 'solver': 'lbfgs'}
+    model = LogisticRegression(**params, max_iter= 1000)
     model.fit(x_train, y_train)
     y_valid_pred = model.predict(x_valid)
     
@@ -77,16 +81,6 @@ def save_features() :
 def save_text_seq() :
     emo_train_df = pd.read_csv('datasets/train/train_emoticon.csv')
     repeat_emos = find_common_characters(emo_train_df['input_emoticon'])
-    print(repeat_emos)
-    repeat_emo_code = {
-        "🙼": "284",
-        "🛐": "464",
-        "🙯": "262",
-        "😛": "15436",
-        "😣": "614",
-        "😑": "1596",
-        "🚼": "422",
-    }
 
     train_df = pd.read_csv('datasets/train/train_text_seq.csv')
     valid_df = pd.read_csv('datasets/valid/valid_text_seq.csv')
@@ -95,20 +89,22 @@ def save_text_seq() :
     train_df["input_str"] = process_strings(train_df["input_str"])
     valid_df["input_str"] = process_strings(valid_df["input_str"])
     test_df["input_str"] = process_strings(test_df["input_str"])
-
-    num_feat = 15  # size of the max length among all strings. the rest of the strings are padded to this length
     
-    train_df = get_columns(train_df)
-    valid_df = get_columns(valid_df)
-    test_df = get_columns(test_df)
+    y_train = train_df['label'].values
+    y_valid = valid_df['label'].values
 
-    oh_encoder = OneHotEncoder(handle_unknown = 'ignore')
-    oh_encoder.fit(train_df)
+    _x_train = train_df['input_str'].values
+    _x_valid = valid_df['input_str'].values
+    _x_test = test_df['input_str'].values
+    
+    vectorizer = CountVectorizer(ngram_range=(3, 5), analyzer='char')  # Extract n-grams
 
-    x_train = train_df.values
-    x_valid = valid_df.values
-    x_test = test_df.values
-    # model = 
+    x_train = vectorizer.fit_transform(_x_train)
+    x_valid = vectorizer.transform(_x_valid)
+    x_test = vectorizer.transform(_x_test)
+
+    params  = {'colsample_bytree': 1.0, 'eval_metric': 'logloss', 'gamma': 0.2, 'learning_rate': 0.1, 'max_depth': 7, 'min_child_weight': 3, 'n_estimators': 500, 'subsample': 1.0}
+    model = XGBClassifier(**params)
     model.fit(x_train, y_train)
     y_valid_pred = model.predict(x_valid)
     
@@ -116,10 +112,8 @@ def save_text_seq() :
     
     generate_submission_txt(model, x_test, file_name='pred_text_seq.txt')
 
-
-
 if __name__ == "__main__" :
     
     save_emoticons()
-    # save_features()
+    save_features()
     save_text_seq()
